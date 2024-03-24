@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Directorywatcher", "Directorywatcher\Directorywatcher.csproj", "{730B5181-E506-4A3C-BA3C-888FD2875AF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{730B5181-E506-4A3C-BA3C-888FD2875AF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{730B5181-E506-4A3C-BA3C-888FD2875AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{730B5181-E506-4A3C-BA3C-888FD2875AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{730B5181-E506-4A3C-BA3C-888FD2875AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FA168CE9-2144-4258-9C19-C4675AA100E0}
+	EndGlobalSection
+EndGlobal
