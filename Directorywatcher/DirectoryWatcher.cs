@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Directorywatcher;
+using Microsoft.Extensions.FileSystemGlobbing;
 
 class DirectoryWatcher
 {
@@ -9,12 +11,14 @@ class DirectoryWatcher
     private Dictionary<string, DateTime> fileLastModifiedTimes;
     private Dictionary<string, int> wordCounts;
     private Timer timer;
+    private DirectoryDao directoryDao;
 
-    public DirectoryWatcher(string directoryPath)
+    public DirectoryWatcher(string directoryPath, DirectoryDao directoryDao)
     {
         this.directoryPath = directoryPath;
         this.fileLastModifiedTimes = new Dictionary<string, DateTime>();
         this.wordCounts = new Dictionary<string, int>();
+        this.directoryDao = directoryDao;
     }
 
     public void StartWatching()
@@ -58,23 +62,28 @@ class DirectoryWatcher
             {
                 DateTime lastModifiedTime = File.GetLastWriteTime(file);
 
+                WatcherDetail watcher = new()
+                {
+                    FileName = file,
+                    MagicWordCount = wordCounts[file],
+                    LastModified = lastModifiedTime
+                };
                 if (fileLastModifiedTimes.ContainsKey(file))
                 {
                     // Check if the file has been modified since the last check
                     if (lastModifiedTime != fileLastModifiedTimes[file])
                     {
                         Console.WriteLine($"File '{file}' has been modified.");
-
+                        directoryDao.UpdateEntity(watcher);
                         // Update the last modified time for the file
                         fileLastModifiedTimes[file] = lastModifiedTime;
-
-                        // Perform any specific actions here based on the file change
                     }
                 }
                 else
                 {
-                    // Add the file to the dictionary if it's new
+                    // Add the file to the dictionary and database if it's new
                     fileLastModifiedTimes[file] = lastModifiedTime;
+                    directoryDao.AddEntity(watcher);
                     Console.WriteLine($"New file detected: '{file}'");
                 }
             }
